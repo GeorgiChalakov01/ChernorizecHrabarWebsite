@@ -1,15 +1,13 @@
 services:
-  webserver:
-    image: httpd:alpine3.22
+  backend:
+    image: cherhrab
     networks:
       - net
     ports:
-      - "8080:80"
+      - "8080:8080"
     environment:
       VIRTUAL_HOST: "ch.pulpudev.com" 
       LETSENCRYPT_HOST: "ch.pulpudev.com" 
-    volumes:
-      - ./html/:/usr/local/apache2/htdocs/
 
 networks:
   net:

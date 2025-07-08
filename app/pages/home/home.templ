@@ -1,0 +1,1371 @@
+package home
+
+import (
+)
+
+
+templ Home() {
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>СУ "Черноризец Храбър" - Пловдив</title>
+	<!-- Bootstrap 5 CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome Icons -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--pink: #b598b7;
+			--yellow: #f6d800;
+			--light-pink: #d8c9d9;
+			--light-yellow: #fef29e;
+			--dark: #333;
+			--light: #f8f9fa;
+			--footer-bg: #d0b9d2;
+		}
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		body {
+			font-family: 'Montserrat', sans-serif;
+			background-color: #f8f9fa;
+			color: var(--dark);
+			overflow-x: hidden;
+		}
+		h1, h2, h3, h4, h5 {
+			font-weight: 700;
+		}
+		/* Header Styles */
+		.navbar {
+			background-color: white;
+			box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+			padding: 1rem 0;
+		}
+		.navbar-brand {
+			display: flex;
+			align-items: center;
+			margin-right: 0;
+		}
+		.navbar-brand img {
+			max-height: 50px; /* Changed from height to max-height */
+			width: auto;
+			max-width: 100%;
+		}
+		.navbar-toggler {
+			border: none;
+			padding: 0.25rem;
+		}
+		.nav-link {
+			font-weight: 500;
+			margin: 0 0.5rem;
+			position: relative;
+			white-space: nowrap;
+		}
+		.nav-link:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 0;
+			height: 2px;
+			background-color: var(--yellow);
+			transition: width 0.3s ease;
+		}
+		.nav-link:hover:after {
+			width: 100%;
+		}
+		.dropdown-toggle::after {
+			display: none !important;
+		}
+		.dropdown-menu {
+			border: none;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			border-radius: 10px;
+			overflow: hidden;
+			margin-top: 8px !important;
+		}
+		.dropdown-item {
+			padding: 0.75rem 1.5rem;
+			transition: all 0.3s ease;
+		}
+		.dropdown-item:hover {
+			background-color: var(--light-pink);
+			padding-left: 1.75rem;
+		}
+		/* Dropdown hover effect for desktop */
+		@media (min-width: 992px) {
+			.dropdown:hover .dropdown-menu {
+				display: block;
+			}
+		}
+		.search-bar {
+			position: relative;
+			flex-grow: 1;
+			max-width: 400px;
+			margin-left: auto;
+		}
+		.search-bar input {
+			border-radius: 30px;
+			padding: 0.5rem 1.5rem;
+			border: 2px solid var(--light-pink);
+			transition: all 0.3s ease;
+			width: 100%;
+		}
+		.search-bar input:focus {
+			border-color: var(--pink);
+			box-shadow: 0 0 0 0.25rem rgba(181, 152, 183, 0.25);
+		}
+		.search-bar button {
+			position: absolute;
+			right: 5px;
+			top: 5px;
+			border-radius: 50%;
+			width: 35px;
+			height: 35px;
+			background: var(--yellow);
+			border: none;
+			color: var(--dark);
+			transition: all 0.3s ease;
+		}
+		.search-bar button:hover {
+			background: #e0c300;
+			transform: rotate(10deg);
+		}
+		/* Hero Section */
+		.hero {
+			background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://www.cherhrab.com/wp-content/uploads/2016/12/cropped-PIC_0922.jpg');
+			background-size: cover;
+			background-position: center;
+			padding: 7rem 0;
+			color: white;
+			position: relative;
+			overflow: hidden;
+			text-align: center;
+		}
+		.hero-content {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+		.hero h1 {
+			font-size: 3.5rem;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+			margin-bottom: 1.5rem;
+			animation: fadeInUp 1s ease;
+		}
+		.hero p {
+			font-size: 1.5rem;
+			margin: 0 auto 2rem;
+			animation: fadeInUp 1s ease 0.2s forwards;
+			opacity: 0;
+			font-weight: 600;
+		}
+		.hero-btn {
+			background: var(--yellow);
+			color: var(--dark);
+			border: none;
+			padding: 0.8rem 2rem;
+			border-radius: 30px;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			animation: fadeInUp 1s ease 0.4s forwards;
+			opacity: 0;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+			font-size: 1.1rem;
+		}
+		.hero-btn:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+			background: var(--light-yellow);
+		}
+		/* Introduction Section */
+		.intro-section {
+			padding: 5rem 0;
+			background-color: white;
+		}
+		.intro-text {
+			font-size: 1.2rem;
+			line-height: 1.8;
+		}
+		.year-badge {
+			background: var(--yellow);
+			color: var(--dark);
+			padding: 0.5rem 1.5rem;
+			border-radius: 30px;
+			font-weight: 700;
+			display: inline-block;
+			margin-bottom: 1.5rem;
+		}
+		/* Stats Section */
+		.stats-section {
+			background: linear-gradient(135deg, var(--pink) 0%, #9b7f9d 100%);
+			padding: 4rem 0;
+			color: white;
+		}
+		.stat-box {
+			text-align: center;
+			padding: 2rem;
+			border-radius: 15px;
+			transition: all 0.3s ease;
+		}
+		.stat-box:hover {
+			transform: translateY(-10px);
+			background: rgba(255, 255, 255, 0.1);
+		}
+		.stat-number {
+			font-size: 3.5rem;
+			font-weight: 800;
+			margin-bottom: 0.5rem;
+		}
+		.stat-text {
+			font-size: 1.2rem;
+		}
+		/* News Section */
+		.news-section {
+			padding: 5rem 0;
+			background-color: #f8f9fa;
+		}
+		.section-title {
+			position: relative;
+			margin-bottom: 3rem;
+			text-align: center;
+		}
+		.section-title:after {
+			content: '';
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 80px;
+			height: 4px;
+			background: linear-gradient(to right, var(--pink), var(--yellow));
+			border-radius: 2px;
+		}
+		.news-card {
+			border: none;
+			border-radius: 15px;
+			overflow: hidden;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+			height: 100%;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+		}
+		.news-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+		}
+		.news-img {
+			height: 200px;
+			background-color: var(--light-pink);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--pink);
+			font-size: 3rem;
+		}
+		.news-date {
+			position: absolute;
+			top: 15px;
+			right: 15px;
+			background: var(--yellow);
+			color: var(--dark);
+			padding: 0.3rem 0.8rem;
+			border-radius: 30px;
+			font-weight: 600;
+			font-size: 0.9rem;
+		}
+		.news-body {
+			padding: 1.5rem;
+		}
+		.news-author {
+			color: var(--pink);
+			font-weight: 600;
+			margin-bottom: 0.5rem;
+			font-size: 0.9rem;
+		}
+		.news-title {
+			color: var(--dark);
+			font-weight: 700;
+			margin-bottom: 0.8rem;
+		}
+		.news-text {
+			color: #666;
+			margin-bottom: 1.5rem;
+		}
+		.news-link {
+			color: var(--pink);
+			font-weight: 600;
+			text-decoration: none;
+			display: inline-flex;
+			align-items: center;
+			transition: all 0.3s ease;
+		}
+		.news-link i {
+			margin-left: 5px;
+			transition: transform 0.3s ease;
+		}
+		.news-link:hover {
+			color: #9b7f9d;
+		}
+		.news-link:hover i {
+			transform: translateX(5px);
+		}
+		.all-news-btn {
+			background: var(--yellow);
+			color: var(--dark);
+			border: none;
+			padding: 0.8rem 2rem;
+			border-radius: 30px;
+			font-weight: 600;
+			transition: all 0.3s ease;
+			display: inline-block;
+			margin-top: 2rem;
+		}
+		.all-news-btn:hover {
+			transform: translateY(-5px);
+			background: var(--light-yellow);
+			box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+		}
+		/* Specialties Section */
+		.specialties-section {
+			padding: 5rem 0;
+			background-color: white;
+		}
+		.specialty-card {
+			border: none;
+			border-radius: 15px;
+			overflow: hidden;
+			transition: all 0.3s ease;
+			height: 100%;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+			position: relative;
+			background: linear-gradient(135deg, var(--pink) 0%, #9b7f9d 100%);
+			color: white;
+			min-height: 200px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 2rem;
+			text-align: center;
+		}
+		.specialty-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+		}
+		.specialty-icon {
+			font-size: 3rem;
+			margin-bottom: 1rem;
+			color: var(--yellow);
+		}
+		.specialty-title {
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+		}
+		.specialty-desc {
+			opacity: 0.9;
+			font-size: 0.9rem;
+		}
+		/* Equipment Section */
+		.equipment-section {
+			padding: 5rem 0;
+			background-color: #f8f9fa;
+		}
+		.equipment-card {
+			border: none;
+			border-radius: 15px;
+			overflow: hidden;
+			transition: all 0.3s ease;
+			height: 100%;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+			background: white;
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+		.equipment-img {
+			height: 250px;
+			background-color: var(--light-pink);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--pink);
+			font-size: 4rem;
+			flex-shrink: 0;
+		}
+		.equipment-body {
+			padding: 2rem;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+		/* Podcast Section */
+		.podcast-section {
+			padding: 5rem 0;
+			background: linear-gradient(135deg, var(--pink) 0%, #9b7f9d 100%);
+			color: white;
+		}
+		.podcast-card {
+			border-radius: 15px;
+			overflow: hidden;
+			transition: all 0.3s ease;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+			background: rgba(255, 255, 255, 0.1);
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+		.podcast-card:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+		}
+		.podcast-img {
+			height: 200px;
+			background-size: cover;
+			background-position: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
+			flex-shrink: 0;
+		}
+		.podcast-img::after {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.4);
+		}
+		.podcast-img i {
+			color: white;
+			font-size: 3rem;
+			z-index: 1;
+			transition: all 0.3s ease;
+		}
+		.podcast-img:hover i {
+			transform: scale(1.2);
+		}
+		.podcast-body {
+			padding: 1.5rem;
+			flex-grow: 1;
+			display: flex;
+			flex-direction: column;
+		}
+		.podcast-title {
+			font-weight: 700;
+			margin-bottom: 1rem;
+			flex-grow: 1;
+		}
+		/* Calendar Section */
+		.calendar-section {
+			padding: 5rem 0;
+			background-color: white;
+		}
+		.calendar-container {
+			background: white;
+			border-radius: 20px;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+			overflow: hidden;
+			padding: 2rem;
+		}
+		.calendar-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 1.5rem;
+		}
+		.calendar-nav {
+			display: flex;
+			gap: 10px;
+		}
+		.calendar-nav-btn {
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			background: var(--light-pink);
+			border: none;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--pink);
+			transition: all 0.3s ease;
+		}
+		.calendar-nav-btn:hover {
+			background: var(--pink);
+			color: white;
+		}
+		.calendar-grid {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			gap: 10px;
+			margin-bottom: 1.5rem;
+		}
+		.calendar-day {
+			text-align: center;
+			padding: 0.5rem;
+			font-weight: 600;
+			color: #777;
+		}
+		.calendar-date {
+			text-align: center;
+			padding: 0.8rem 0.5rem;
+			border-radius: 10px;
+			cursor: pointer;
+			transition: all 0.3s ease;
+			position: relative;
+		}
+		.calendar-date:hover {
+			background: var(--light-pink);
+		}
+		.calendar-date.today {
+			background: var(--yellow);
+			color: var(--dark);
+			font-weight: 700;
+		}
+		.calendar-date.event:after {
+			content: '';
+			position: absolute;
+			bottom: 5px;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 6px;
+			height: 6px;
+			background: var(--pink);
+			border-radius: 50%;
+		}
+		.events-list {
+			border-top: 1px solid #eee;
+			padding-top: 1.5rem;
+		}
+		.event-item {
+			padding: 1rem;
+			border-left: 3px solid var(--yellow);
+			margin-bottom: 1rem;
+			background: #f9f9f9;
+			border-radius: 0 8px 8px 0;
+			transition: all 0.3s ease;
+		}
+		.event-item:hover {
+			transform: translateX(5px);
+			background: #fff;
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+		}
+		.event-date {
+			font-weight: 600;
+			color: var(--pink);
+			margin-bottom: 0.3rem;
+		}
+		.event-title {
+			font-weight: 600;
+			margin-bottom: 0.3rem;
+		}
+		/* Social Media Section */
+		.social-section {
+			padding: 4rem 0;
+			background: linear-gradient(135deg, var(--pink) 0%, #9b7f9d 100%);
+			color: white;
+		}
+		.social-title {
+			margin-bottom: 2rem;
+		}
+		.social-icons {
+			display: flex;
+			justify-content: center;
+			gap: 2rem;
+			flex-wrap: wrap;
+		}
+		.social-icon {
+			width: 70px;
+			height: 70px;
+			border-radius: 50%;
+			background: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: var(--pink);
+			font-size: 2rem;
+			transition: all 0.3s ease;
+			box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+		}
+		.social-icon:hover {
+			transform: translateY(-10px) scale(1.1);
+			color: var(--yellow);
+		}
+		.social-icon.youtube:hover {
+			color: #FF0000;
+		}
+		.social-icon.facebook:hover {
+			color: #1877F2;
+		}
+		/* Footer */
+		.footer {
+			background: var(--footer-bg);
+			color: var(--dark);
+			padding: 3rem 0 1.5rem;
+		}
+		.footer-logo-container {
+			display: flex;
+			justify-content: center;
+			margin-bottom: 1.5rem;
+		}
+		.footer-logo {
+			max-height: 60px; /* Changed from height to max-height */
+			width: auto;
+			max-width: 100%;
+		}
+		.footer-links {
+			text-align: center;
+		}
+		.footer-links h5 {
+			color: #6d4a6f;
+			margin-bottom: 1.5rem;
+			position: relative;
+			padding-bottom: 0.5rem;
+		}
+		.footer-links h5:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 40px;
+			height: 2px;
+			background: var(--yellow);
+		}
+		.footer-links ul {
+			list-style: none;
+			padding: 0;
+		}
+		.footer-links li {
+			margin-bottom: 0.7rem;
+		}
+		.footer-links a {
+			color: #555;
+			text-decoration: none;
+			transition: all 0.3s ease;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.footer-links a:hover {
+			color: #6d4a6f;
+		}
+		.e-diary-logo {
+			height: 50px;
+			width: auto;
+			margin-right: 10px;
+			object-fit: contain;
+			border-radius: 10px; /* Added rounded corners */
+		}
+		.copyright {
+			text-align: center;
+			padding-top: 2rem;
+			margin-top: 2rem;
+			border-top: 1px solid rgba(109, 74, 111, 0.3);
+			color: #6d4a6f;
+			font-size: 0.9rem;
+		}
+		/* Animations */
+		@keyframes fadeInUp {
+			from {
+				opacity: 0;
+				transform: translateY(50px);
+			}
+			to {
+				opacity: 1;
+				transform: translateY(0);
+			}
+		}
+		@keyframes slideInLeft {
+			from {
+				opacity: 0;
+				transform: translateX(-50px);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+		@keyframes slideInRight {
+			from {
+				opacity: 0;
+				transform: translateX(50px);
+			}
+			to {
+				opacity: 1;
+				transform: translateX(0);
+			}
+		}
+		@keyframes scaleIn {
+			from {
+				opacity: 0;
+				transform: scale(0.8);
+			}
+			to {
+				opacity: 1;
+				transform: scale(1);
+			}
+		}
+		.animate {
+			opacity: 0;
+			transform: translateY(50px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+		.animate.show {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		.slide-left {
+			opacity: 0;
+			transform: translateX(-50px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+		.slide-left.show {
+			opacity: 1;
+			transform: translateX(0);
+		}
+		.slide-right {
+			opacity: 0;
+			transform: translateX(50px);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+		.slide-right.show {
+			opacity: 1;
+			transform: translateX(0);
+		}
+		.scale-in {
+			opacity: 0;
+			transform: scale(0.8);
+			transition: opacity 0.8s ease, transform 0.8s ease;
+		}
+		.scale-in.show {
+			opacity: 1;
+			transform: scale(1);
+		}
+		.delay-1 {
+			transition-delay: 0.2s;
+		}
+		.delay-2 {
+			transition-delay: 0.4s;
+		}
+		.delay-3 {
+			transition-delay: 0.6s;
+		}
+		/* Hover animations */
+		.hover-animate {
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+		.hover-animate:hover {
+			transform: translateY(-8px);
+			box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+		}
+		/* Responsive Adjustments */
+		@media (max-width: 1200px) {
+			.navbar .nav-link {
+				font-size: 0.9rem;
+				margin: 0 0.3rem;
+			}
+			.navbar-brand img {
+				max-height: 45px; /* Changed from height to max-height */
+			}
+			.search-bar {
+				max-width: 350px;
+			}
+		}
+		@media (max-width: 992px) {
+			.hero h1 {
+				font-size: 2.8rem;
+			}
+			.hero p {
+				font-size: 1.3rem;
+			}
+			.navbar-nav {
+				align-items: center;
+			}
+			.dropdown-menu {
+				text-align: center;
+			}
+			.search-bar {
+				max-width: 300px;
+				margin-top: 1rem;
+			}
+		}
+		@media (max-width: 768px) {
+			.hero {
+				padding: 4rem 0;
+			}
+			.hero h1 {
+				font-size: 2.2rem;
+			}
+			.hero p {
+				font-size: 1.1rem;
+			}
+			.section-title {
+				margin-bottom: 2rem;
+			}
+			.calendar-grid {
+				gap: 5px;
+			}
+			.calendar-date {
+				padding: 0.5rem 0.3rem;
+				font-size: 0.9rem;
+			}
+			.social-icon {
+				width: 60px;
+				height: 60px;
+				font-size: 1.7rem;
+			}
+			.stat-number {
+				font-size: 2.5rem;
+			}
+			.navbar-brand {
+				max-width: 200px;
+			}
+			.footer-logo {
+				max-height: 50px; /* Changed from height to max-height */
+			}
+		}
+		@media (max-width: 576px) {
+			.navbar-brand img {
+				max-height: 40px; /* Changed from height to max-height */
+			}
+			.hero h1 {
+				font-size: 1.8rem;
+			}
+			.search-bar {
+				margin-top: 1rem;
+				max-width: 100%;
+			}
+			.calendar-header {
+				flex-direction: column;
+				gap: 1rem;
+			}
+			.dropdown-item {
+				text-align: center;
+			}
+			.footer-logo {
+				max-height: 40px; /* Changed from height to max-height */
+			}
+			.e-diary-logo {
+				height: 40px;
+			}
+		}
+		/* Custom styles for intro section */
+		.intro-image-container {
+			height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: var(--light-pink);
+			border-radius: 15px;
+			min-height: 300px;
+		}
+		.intro-icon {
+			color: var(--pink);
+			font-size: 6rem;
+			transition: transform 0.5s ease;
+		}
+		.intro-image-container:hover .intro-icon {
+			transform: scale(1.1) rotate(5deg);
+		}
+		/* Dropdown mobile fix */
+		.dropdown-toggle {
+			display: block;
+			width: 100%;
+			text-align: center;
+		}
+		.dropdown-menu.show {
+			position: static !important;
+			transform: none !important;
+		}
+	</style>
+</head>
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg sticky-top">
+		<div class="container">
+			<a class="navbar-brand" href="#">
+				<img src="http://www.cherhrab.com/wp-content/uploads/2022/09/unnamed.png" alt="СУ Черноризец Храбър">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+				<i class="fas fa-bars"></i>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-center">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">Начало</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown">
+							Училището
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="aboutDropdown">
+							<li><a class="dropdown-item" href="#">История</a></li>
+							<li><a class="dropdown-item" href="#">Стратегия за развитие</a></li>
+							<li><a class="dropdown-item" href="#">Материална база</a></li>
+							<li><a class="dropdown-item" href="#">Колектив</a></li>
+							<li><a class="dropdown-item" href="#">Ученически парламент</a></li>
+						</ul>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="academicsDropdown" role="button" data-bs-toggle="dropdown">
+							Обучение
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="academicsDropdown">
+							<li><a class="dropdown-item" href="#">Училищни документи</a></li>
+							<li><a class="dropdown-item" href="#">Форми на обучение</a></li>
+							<li><a class="dropdown-item" href="#">Стипендии</a></li>
+							<li><a class="dropdown-item" href="#">Професионално образование</a></li>
+							<li><a class="dropdown-item" href="#">Рейтингова система</a></li>
+						</ul>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Е-обучение</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Прием</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Проекти</a>
+					</li>
+				</ul>
+				<div class="search-bar">
+					<input type="text" class="form-control" placeholder="Търсене...">
+					<button class="btn"><i class="fas fa-search"></i></button>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-- Hero Section -->
+	<section class="hero">
+		<div class="hero-content">
+			<h1 class="animate">Иновативно Образование за Бъдещето</h1>
+			<p class="animate delay-1">Развиваме таланти и формираме лидери в съвременна образователна среда</p>
+			<button class="btn hero-btn animate delay-2">Виртуална разходка <i class="fas fa-arrow-right ms-2"></i></button>
+		</div>
+	</section>
+	<!-- Introduction Section -->
+	<section class="intro-section">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6 mb-5 mb-lg-0 slide-left">
+					<div class="year-badge">от 1978 г. до Днес</div>
+					<h2 class="mb-4">Място, където талантите цъфтят!</h2>
+					<p class="intro-text">
+						СУ "Черноризец Храбър" е носител на Почетния знак на град Пловдив и район „Тракия" и е сред най-бързоразвиващите се училища в Пловдив с над 1160 ученици. Благодарение на ръководството училището разполага с отлична материална база бизнес кабинет, иновативни кабинети по български език и литература, по изобразително изкуство, по история, интерактивни дъски, нови физкултурни салони и две открити игрища, дворна площадка за шахмат, игротека за учениците от начален курс, богата училищна библиотека, кътове за четене на всеки етаж, както и къщички за книги в двора на училището. Базата е предпоставка за развитие на творчески и спортен потенциал на учениците.
+					</p>
+					<p class="intro-text mt-4">
+						Присъединете се към нашата общност и разгърнете вашия потенциал в среда, която подкрепя иновациите и личностното развитие!
+					</p>
+				</div>
+				<div class="col-lg-6 slide-right">
+					<div class="intro-image-container">
+						<div class="intro-icon">
+							<i class="fas fa-graduation-cap"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Stats Section -->
+	<section class="stats-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 mb-4 mb-md-0 scale-in">
+					<div class="stat-box">
+						<div class="stat-number">1160+</div>
+						<div class="stat-text">Ученици</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4 mb-md-0 scale-in delay-1">
+					<div class="stat-box">
+						<div class="stat-number">53</div>
+						<div class="stat-text">Паралелки</div>
+					</div>
+				</div>
+				<div class="col-md-4 scale-in delay-2">
+					<div class="stat-box">
+						<div class="stat-number">32</div>
+						<div class="stat-text">Сертифицирани преподаватели</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- News Section -->
+	<section class="news-section">
+		<div class="container">
+			<h2 class="section-title animate">Новини и Събития</h2>
+			<div class="row g-4">
+				<div class="col-md-4">
+					<div class="news-card slide-left">
+						<div class="news-img">
+							<i class="fas fa-bullhorn"></i>
+							<div class="news-date">Дек 8, 2022</div>
+						</div>
+						<div class="news-body">
+							<div class="news-author">Администрация</div>
+							<h5 class="news-title">Подаване на сигнали до СУ "Черноризец Храбър"</h5>
+							<p class="news-text">Уважаеми граждани, Във връзка с постъпващите анонимни сигнали, Ви уведомяваме: Право на всеки гражданин е да подаде сигнал за нередности...</p>
+							<a href="#" class="news-link">Прочети повече <i class="fas fa-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="news-card slide-left delay-1">
+						<div class="news-img">
+							<i class="fas fa-chalkboard-teacher"></i>
+							<div class="news-date">Юли 7, 2025</div>
+						</div>
+						<div class="news-body">
+							<div class="news-author">Станимира Димитриева</div>
+							<h5 class="news-title">Одобрен кандидат за позицията учител</h5>
+							<p class="news-text">След проведено събеседване на комисия към училището, одобреният кандидат за позицията учител по икономически дисциплини е с ВХ. № 6590/04,07,2025г.</p>
+							<a href="#" class="news-link">Прочети повече <i class="fas fa-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="news-card slide-left delay-2">
+						<div class="news-img">
+							<i class="fas fa-medal"></i>
+							<div class="news-date">Юли 4, 2025</div>
+						</div>
+						<div class="news-body">
+							<div class="news-author">Администрация</div>
+							<h5 class="news-title">Тържествено връчване на свидетелствата</h5>
+							<p class="news-text">Тридесет и двама пълни отличници бяха наградени на тържествена церемония по връчване на свидетелствата за завършено основно образование...</p>
+							<a href="#" class="news-link">Прочети повече <i class="fas fa-arrow-right"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="text-center mt-5">
+				<a href="#" class="btn all-news-btn">Виж всички новини <i class="fas fa-arrow-right ms-2"></i></a>
+			</div>
+		</div>
+	</section>
+	<!-- Specialties Section -->
+	<section class="specialties-section">
+		<div class="container">
+			<h2 class="section-title animate">Професионални Специалности</h2>
+			<div class="row g-4">
+				<div class="col-md-4">
+					<a href="#" class="specialty-card slide-right hover-animate">
+						<div class="specialty-icon">
+							<i class="fas fa-laptop-code"></i>
+						</div>
+						<h3 class="specialty-title">Софтуерни и хардуерни науки</h3>
+						<p class="specialty-desc">С интензивно изучаване на испански език. Профилиращи предмети в областта на информационните технологии и информатиката. Модел 1:1</p>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="specialty-card slide-right delay-1 hover-animate">
+						<div class="specialty-icon">
+							<i class="fas fa-paint-brush"></i>
+						</div>
+						<h3 class="specialty-title">Графичен дизайн</h3>
+						<p class="specialty-desc">Професия графичен дизайнер с разширено изучаване на английски език. Модел 1:1</p>
+					</a>
+				</div>
+				<div class="col-md-4">
+					<a href="#" class="specialty-card slide-right delay-2 hover-animate">
+						<div class="specialty-icon">
+							<i class="fas fa-chart-line"></i>
+						</div>
+						<h3 class="specialty-title">Икономика и мениджмънт</h3>
+						<p class="specialty-desc">Професия икономист с фокус върху съвременните бизнес модели</p>
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Equipment Section -->
+	<section class="equipment-section">
+		<div class="container">
+			<h2 class="section-title animate">Модерна Техника</h2>
+			<div class="row g-4">
+				<div class="col-lg-6">
+					<div class="equipment-card slide-left hover-animate">
+						<div class="equipment-img">
+							<i class="fas fa-atom"></i>
+						</div>
+						<div class="equipment-body">
+							<h3>STEM Център</h3>
+							<p>Училището разполага с мултимедиен STEM център, оборудван с най-новите технологии за научни изследвания и експерименти. Центърът включва 3D принтери, роботика комплекти, VR технологии и цифрови лаборатории, които предоставят на учениците възможност да развиват своите научни и технологични умения в иновативна среда.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="equipment-card slide-left delay-1 hover-animate">
+						<div class="equipment-img">
+							<i class="fas fa-laptop"></i>
+						</div>
+						<div class="equipment-body">
+							<h3>Модерни Компютърни Зали</h3>
+							<p>Всички компютърни зали са оборудвани с последно поколение компютри, интерактивни табла и високоскоростен интернет. Учениците имат възможност да работят с професионален софтуер за графичен дизайн, програмиране и икономически анализи, което подпомага тяхното професионално развитие.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="equipment-card slide-left hover-animate">
+						<div class="equipment-img">
+							<i class="fas fa-book"></i>
+						</div>
+						<div class="equipment-body">
+							<h3>Богата Библиотека</h3>
+							<p>Училищната библиотека предлага разнообразни книги и ресурси, както и кътове за четене на всеки етаж. Допълнително, в двора на училището са разположени специални къщички за книги, които насърчават учениците към четене и самообучение.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="equipment-card slide-left delay-1 hover-animate">
+						<div class="equipment-img">
+							<i class="fas fa-dumbbell"></i>
+						</div>
+						<div class="equipment-body">
+							<h3>Спортни Съоръжения</h3>
+							<p>Училището разполага с нови физкултурни салони, две открити игрища, дворна площадка за шахмат и игротека за учениците от начален курс. Тези съоръжения предоставят отлични условия за физическо развитие и спортни дейности.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Podcast Section -->
+	<section class="podcast-section">
+		<div class="container">
+			<h2 class="section-title animate">Образователни Подкасти</h2>
+			<div class="row g-4">
+				<div class="col-md-4">
+					<div class="podcast-card slide-right hover-animate">
+						<div class="podcast-img" style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.creativefabrica.com%2Fproducts%2Fpreviews%2F2024%2F08%2F19%2FZYQAXdGDN%2F2kr5m3i9zvWxsUWWQfn5mVAzxlE-desktop.jpg&f=1&nofb=1&ipt=e141647b53234baa1f44a1f8a4d73dc734ff8c364a5010b632f7d1b72d14aa9e')">
+							<i class="fas fa-play-circle"></i>
+						</div>
+						<div class="podcast-body">
+							<h4 class="podcast-title">„Живот, който вълнува - ежедневието на един лекар”</h4>
+							<a href="https://www.youtube.com/watch?v=M_IuKQ76Neg" target="_blank" class="btn btn-light mt-3"><i class="fab fa-youtube me-2"></i> Гледай в YouTube</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="podcast-card slide-right delay-1 hover-animate">
+						<div class="podcast-img" style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimg.freepik.com%2Fpremium-photo%2Fwomens-day-illustration-with-flower-abstract-background_790155-4.jpg%3Fw%3D2000&f=1&nofb=1&ipt=fc2c649706f916cec1ca7334ad5ae0c514479aff5783ab4b62c30e8d554fb85b')">
+							<i class="fas fa-play-circle"></i>
+						</div>
+						<div class="podcast-body">
+							<h4 class="podcast-title">„8 МАРТ – ПРАЗНИК ИЛИ ЗАДЪЛЖЕНИЕ?“</h4>
+							<a href="https://www.youtube.com/watch?v=GbEWiKuh3Ow" target="_blank" class="btn btn-light mt-3"><i class="fab fa-youtube me-2"></i> Гледай в YouTube</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="podcast-card slide-right delay-2 hover-animate">
+						<div class="podcast-img" style="background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmir-s3-cdn-cf.behance.net%2Fproject_modules%2Ffs%2F49d183117403775.60755ab5221bf.jpg&f=1&nofb=1&ipt=49db6f43c21dfe45afab6755fecbbfa89e5ca50e2549f1dddb2d4d5bed6159e1')">
+							<i class="fas fa-play-circle"></i>
+						</div>
+						<div class="podcast-body">
+							<h4 class="podcast-title">PC EPISODE2</h4>
+							<a href="https://www.youtube.com/watch?v=RtdMOaF3XLY&list=PLqhOROJ0TtVQZO-ku6i91574ngkXmVknk&index=3" target="_blank" class="btn btn-light mt-3"><i class="fab fa-youtube me-2"></i> Гледай в YouTube</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Calendar Section -->
+	<section class="calendar-section">
+		<div class="container">
+			<h2 class="section-title animate">Училищен Календар</h2>
+			<div class="calendar-container slide-left">
+				<div class="calendar-header">
+					<h3 class="mb-0">Юли 2025</h3>
+					<div class="calendar-nav">
+						<button class="calendar-nav-btn"><i class="fas fa-chevron-left"></i></button>
+						<button class="calendar-nav-btn"><i class="fas fa-chevron-right"></i></button>
+					</div>
+				</div>
+				<div class="calendar-grid">
+					<div class="calendar-day">Нед</div>
+					<div class="calendar-day">Пон</div>
+					<div class="calendar-day">Вто</div>
+					<div class="calendar-day">Сря</div>
+					<div class="calendar-day">Чет</div>
+					<div class="calendar-day">Пет</div>
+					<div class="calendar-day">Съб</div>
+					
+					<!-- June 2025 days -->
+					<div class="calendar-date">29</div>
+					<div class="calendar-date">30</div>
+					
+					<!-- July 2025 days -->
+					<div class="calendar-date">1</div>
+					<div class="calendar-date">2</div>
+					<div class="calendar-date">3</div>
+					<div class="calendar-date">4</div>
+					<div class="calendar-date">5</div>
+					
+					<div class="calendar-date">6</div>
+					<div class="calendar-date">7</div>
+					<div class="calendar-date today">8</div>
+					<div class="calendar-date">9</div>
+					<div class="calendar-date">10</div>
+					<div class="calendar-date">11</div>
+					<div class="calendar-date">12</div>
+					
+					<div class="calendar-date">13</div>
+					<div class="calendar-date event">14</div>
+					<div class="calendar-date event">15</div>
+					<div class="calendar-date">16</div>
+					<div class="calendar-date">17</div>
+					<div class="calendar-date">18</div>
+					<div class="calendar-date">19</div>
+					
+					<div class="calendar-date">20</div>
+					<div class="calendar-date">21</div>
+					<div class="calendar-date">22</div>
+					<div class="calendar-date">23</div>
+					<div class="calendar-date">24</div>
+					<div class="calendar-date">25</div>
+					<div class="calendar-date">26</div>
+					
+					<div class="calendar-date event">27</div>
+					<div class="calendar-date">28</div>
+					<div class="calendar-date">29</div>
+					<div class="calendar-date">30</div>
+					<div class="calendar-date">31</div>
+					
+					<!-- August 2025 days -->
+					<div class="calendar-date">1</div>
+					<div class="calendar-date">2</div>
+				</div>
+				<div class="events-list">
+					<h5 class="mb-3">Предстоящи Събития</h5>
+					<div class="event-item">
+						<div class="event-date">14 Юли, 2025</div>
+						<div class="event-title">Срещи с родители</div>
+						<div class="event-time">15:00 - 18:00</div>
+					</div>
+					<div class="event-item">
+						<div class="event-date">15 Юли, 2025</div>
+						<div class="event-title">Изложба на научни проекти</div>
+						<div class="event-time">9:00 - 14:00</div>
+					</div>
+					<div class="event-item">
+						<div class="event-date">27 Юли, 2025</div>
+						<div class="event-title">Годишен спортден</div>
+						<div class="event-time">Цял ден</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Social Media Section -->
+	<section class="social-section text-center">
+		<div class="container">
+			<h2 class="section-title animate">Свържете се с нас</h2>
+			<div class="social-icons">
+				<a href="https://www.youtube.com/channel/UCq44Z5lD3IaSkS1Kp-H6eiw" target="_blank" class="social-icon youtube scale-in hover-animate">
+					<i class="fab fa-youtube"></i>
+				</a>
+				<a href="https://www.facebook.com/groups/246119765757" target="_blank" class="social-icon facebook scale-in delay-1 hover-animate">
+					<i class="fab fa-facebook-f"></i>
+				</a>
+				<a href="#" class="social-icon scale-in delay-2 hover-animate">
+					<i class="fab fa-instagram"></i>
+				</a>
+			</div>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer class="footer">
+		<div class="container">
+			<div class="footer-logo-container">
+				<img src="http://www.cherhrab.com/wp-content/uploads/2022/09/unnamed.png" alt="СУ Черноризец Храбър" class="footer-logo">
+			</div>
+			<div class="row">
+				<div class="col-lg-6 mb-4 mb-lg-0">
+					<div class="footer-links">
+						<h5>Контакти</h5>
+						<ul>
+							<li><i class="fas fa-map-marker-alt me-2"></i> гр. Пловдив ж.к. Тракия, ул. Съединение с/у бл.10</li>
+							<li><i class="fas fa-phone me-2"></i> (032) 123 456</li>
+							<li><i class="fas fa-envelope me-2"></i> info@cherhrab.com</li>
+							<li><i class="fas fa-clock me-2"></i> Пон-Пет: 8:00 - 17:00</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<div class="footer-links">
+						<h5>Бързи връзки</h5>
+						<ul>
+							<li>
+								<a href="#" class="d-inline-flex align-items-center">
+									<img src="https://www.cherhrab.com/wp-content/uploads/2020/10/%D0%B8%D0%B7%D1%82%D0%B5%D0%B3%D0%BB%D0%B5%D0%BD-%D1%84%D0%B0%D0%B9%D0%BB.png" alt="Електронен дневник" class="e-diary-logo">
+								</a>
+							</li>
+							<li><a href="#">Учебен календар</a></li>
+							<li><a href="#">Учебни материали</a></li>
+							<li><a href="#">За учители</a></li>
+							<li><a href="#">За ученици</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">
+				&copy; 2025 СУ "Черноризец Храбър". Всички права запазени.
+			</div>
+		</div>
+	</footer>
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Custom JS -->
+	<script>
+		// Scroll animations using Intersection Observer
+		document.addEventListener('DOMContentLoaded', function() {
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach(entry => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('show');
+					}
+				});
+			}, {
+				threshold: 0.1
+			});
+			document.querySelectorAll('.animate, .slide-left, .slide-right, .scale-in').forEach(el => {
+				observer.observe(el);
+			});
+			// Today's date in calendar
+			const today = new Date();
+			// Set to July 8, 2025 for the demo
+			const demoDate = new Date(2025, 6, 8); // Note: months are 0-indexed, so 6 is July
+			
+			const calendarDates = document.querySelectorAll('.calendar-date');
+			calendarDates.forEach(date => {
+				const dateNum = parseInt(date.textContent);
+				if (dateNum === demoDate.getDate() && 
+					date.textContent === '8' && 
+					document.querySelector('.calendar-header h3').textContent.includes('Юли 2025')) {
+					date.classList.add('today');
+				}
+			});
+			// Mobile dropdown text alignment fix
+			document.querySelectorAll('.dropdown-item').forEach(item => {
+				item.addEventListener('click', function() {
+					const navbarCollapse = document.getElementById('navbarContent');
+					if (navbarCollapse.classList.contains('show')) {
+						navbarCollapse.classList.remove('show');
+					}
+				});
+			});
+		});
+	</script>
+</body>
+</html>
+}
