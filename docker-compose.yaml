@@ -6,8 +6,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      VIRTUAL_HOST: "ch.gchalakov.com" 
-      LETSENCRYPT_HOST: "ch.gchalakov.com" 
+      VIRTUAL_HOST: "ch.pulpudev.com" 
+      LETSENCRYPT_HOST: "ch.pulpudev.com" 
     volumes:
       - ./index.html:/usr/local/apache2/htdocs/
 
