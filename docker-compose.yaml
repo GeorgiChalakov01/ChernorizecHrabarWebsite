@@ -3,6 +3,8 @@ services:
     image: httpd:alpine3.22
     networks:
       - net
+    ports:
+      - "8080:80"
     environment:
       VIRTUAL_HOST: "ch.pulpudev.com" 
       LETSENCRYPT_HOST: "ch.pulpudev.com" 
