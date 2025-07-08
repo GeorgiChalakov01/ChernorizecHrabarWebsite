@@ -1,0 +1,16 @@
+services:
+  webserver:
+    image: httpd:alpine3.22
+    networks:
+      - net
+    ports:
+      - "8080:8080"
+    environment:
+      VIRTUAL_HOST: "ch.gchalakov.com" 
+      LETSENCRYPT_HOST: "ch.gchalakov.com" 
+    volumes:
+      - ./index.html:/usr/local/apache2/htdocs/
+
+networks:
+  net:
+    external: true
