@@ -7,7 +7,7 @@ services:
       VIRTUAL_HOST: "ch.pulpudev.com" 
       LETSENCRYPT_HOST: "ch.pulpudev.com" 
     volumes:
-      - ./index.html:/usr/local/apache2/htdocs/
+      - ./html/:/usr/local/apache2/htdocs/
 
 networks:
   net:
