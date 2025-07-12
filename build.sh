@@ -1,1 +1,1 @@
-docker buildx build -t cherhrab .
+docker buildx build -t zaivodlogistics .
